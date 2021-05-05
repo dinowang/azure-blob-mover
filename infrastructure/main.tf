@@ -141,7 +141,7 @@ resource "azurerm_function_app" "mover" {
     "APPINSIGHTS_INSTRUMENTATIONKEY"        = "${azurerm_application_insights.mover.instrumentation_key}"
     "APPLICATIONINSIGHTS_CONNECTION_STRING" = "${azurerm_application_insights.mover.connection_string}"
     "StoragesPublic"                        = "${azurerm_storage_account.public.primary_blob_connection_string}"
-    "StoragesPrivate"                       = "${azurerm_storage_account.public.primary_connection_string}"
+    "StoragesPrivate"                       = "${azurerm_storage_account.private.primary_connection_string}"
     "WEBSITE_DNS_SERVER"                    = "168.63.129.16"
     "WEBSITE_VNET_ROUTE_ALL"                = "1"
     "WEBSITE_RUN_FROM_PACKAGE"              = "1"
