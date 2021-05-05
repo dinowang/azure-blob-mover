@@ -44,6 +44,15 @@ namespace SecureUpload
 
             // var blobUri = new Uri((string)data.GetValue("blobUrl")); // ADLS
             var blobUri = new Uri((string)data.GetValue("url"));
+
+            // https://asecpublic.blob.core.windows.net/user1/1.zip
+            //         ^^^^^^^^^^ storage account
+            // https://asecpublic.blob.core.windows.net/user1/1.zip
+            //                                          ^^^^^ container
+            // https://asecpublic.blob.core.windows.net/user1/1.zip
+            //                                               ^ directory
+            // https://asecpublic.blob.core.windows.net/user1/1.zip
+            //                                                ^^^^^ filename
             var storageAccount = blobUri.Host.Substring(0, blobUri.Host.IndexOf('.'));
             var path = WebUtility.UrlDecode(blobUri.PathAndQuery.Substring(1));
             var container = path.Substring(0, path.IndexOf('/'));
