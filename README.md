@@ -1,7 +1,7 @@
 # Scenario
 
-![](./doc/secure-upload-scenario.svg)
+![](./doc/secure-upload-scenario.png)
 
 # Infrastructure
 
-![](./doc/secure-upload-infrastructure.svg)
+![](./doc/secure-upload-infrastructure.png)
