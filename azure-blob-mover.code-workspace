@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "code"
+		},
+		{
+			"path": "infrastructure"
+		},
+		{
+			"path": "doc"
+		}
+	],
+	"settings": {}
+}
