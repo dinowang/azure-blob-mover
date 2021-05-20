@@ -6,6 +6,16 @@ provider "azurerm" {
   }
 }
 
+provider "azuread" {
+}
+
+data "azuread_domains" "current" {
+  only_initial = true
+}
+
+data "azuread_client_config" "current" {
+}
+
 variable "code" {
   default = "asec"
 }
@@ -111,7 +121,7 @@ resource "azurerm_application_insights" "mover" {
   application_type    = "web"
 }
 
-resource "azurerm_app_service_plan" "mover" {
+resource "azurerm_app_service_plan" "default" {
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
   name                = "${var.code}-func-plan"
@@ -122,10 +132,32 @@ resource "azurerm_app_service_plan" "mover" {
   }
 }
 
+resource "azurerm_app_service" "uploader" {
+  location            = azurerm_resource_group.default.location
+  resource_group_name = azurerm_resource_group.default.name
+  app_service_plan_id = azurerm_app_service_plan.default.id
+  name                = "${var.code}-uploader"
+
+  site_config {
+    always_on                 = true
+    ftps_state                = "Disabled"
+    use_32_bit_worker_process = false
+  }
+
+  app_settings = {
+    "AzureAd:Instance"               = "https://login.microsoftonline.com/"
+    "AzureAd:Domain"                 = "${data.azuread_domains.current.domains[0].domain_name}"
+    "AzureAd:ClientId"               = "cd132c10-4bd0-482e-b743-6e1f6952135e"
+    "AzureAd:TenantId"               = "${data.azuread_client_config.current.tenant_id}"
+    "AzureAd:CallbackPath"           = "/signin-oidc"
+    "PublicStorage:ConnectionString" = "${azurerm_storage_account.public.primary_blob_connection_string}"
+  }
+}
+
 resource "azurerm_function_app" "mover" {
   location                   = azurerm_resource_group.default.location
   resource_group_name        = azurerm_resource_group.default.name
-  app_service_plan_id        = azurerm_app_service_plan.mover.id
+  app_service_plan_id        = azurerm_app_service_plan.default.id
   storage_account_name       = azurerm_storage_account.mover.name
   storage_account_access_key = azurerm_storage_account.mover.primary_access_key
   name                       = "${var.code}-func"

@@ -1,13 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "code"
-		},
-		{
 			"path": "infrastructure"
 		},
 		{
 			"path": "doc"
+		},
+		{
+			"path": "mover"
+		},
+		{
+			"path": "uploader"
 		}
 	],
 	"settings": {}

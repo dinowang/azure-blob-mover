@@ -17,7 +17,7 @@ using Azure.Storage.Files.DataLake;
 using Azure.Storage.Files.DataLake.Models;
 using System.Linq;
 
-namespace SecureUpload
+namespace SecureUpload.Mover
 {
     public static class BlobToFile
     {

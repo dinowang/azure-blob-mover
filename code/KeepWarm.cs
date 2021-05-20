@@ -3,7 +3,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 
-namespace azure_blob_mover
+namespace SecureUpload.Mover
 {
     public static class KeepWarm
     {
