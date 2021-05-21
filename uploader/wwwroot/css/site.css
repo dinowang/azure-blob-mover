@@ -75,13 +75,15 @@ body {
 .dropfile {
   height: 200px;
   border: dotted 2px #ccc;
-  background: white;
+  border-radius: 15px 15px;
+  background: #fafafa;
   position: relative;
   transition: all 1s;
 }
 
 .dropfile::after {
   content: "Drop file over here.";
+  color: #ccc;
   position: absolute;
   top: 0;
   left: 0;
@@ -105,4 +107,8 @@ body {
   content: "Drop down now.";
   color: red;
   transition: all .2s;
+}
+
+.uploads {
+  margin-top: 20px;
 }

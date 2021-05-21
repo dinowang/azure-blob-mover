@@ -47,7 +47,7 @@ $(document).ready(function () {
                 success: function (result, status, xhr) {
                     $this.removeClass("over");
                     $.each(result, (i, x) => {
-                        $(`<li class="list-group-item"><span class="badge badge-info">${x.time}</span> <span class="text-left">${x.message}</span></li>`).prependTo(".uploads");
+                        $(`<li class="list-group-item text-truncate"><span class="float-right">${x.time}</span><span class="text-left">${x.message}</span></li>`).prependTo(".uploads");
                     });
                 },
                 error: function (result, status, xhr) {
